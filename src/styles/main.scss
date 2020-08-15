@@ -64,7 +64,16 @@ ul {
 .form {
   margin-bottom: 40px;
 }
-.input {
+.input-name {
+  width: 200px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+.input-type {
   width: 200px;
   border: none;
   outline: none;

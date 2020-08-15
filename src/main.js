@@ -1,5 +1,6 @@
 const form = document.querySelector('.form');
-const input = document.querySelector('.input');
+const inputName = document.querySelector('.input-name');
+const inputType = document.querySelector('.input-type');
 const itemsList = document.querySelector('.items-list');
 const item = document.querySelector('.item');
 
@@ -54,18 +55,20 @@ let arrData = []
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  addObj(input.value)
+  addObj(inputName.value, inputType.Value)
 })
 
 function addObj(item) {
   if (item !== '') {
     const obj = {
       id: Date.now(),
-      name: item
+      name: item,
+      type: item
     }
       arrData.push(obj);
       addToLocalStorage(arrData);
-      input.value = '';
+      inputName.value = '';
+      inputType.value = '';
   }
 }
 
@@ -77,8 +80,9 @@ function renderArrData(arrData) {
     li.setAttribute('data-key', item.id);
     li.setAttribute('draggable','true');
     li.setAttribute('contenteditable','true');
-    li.innerHTML = `<p class="text">
-    ${item.name}</p>
+    li.innerHTML = `
+    <p class="text">${item.name}</p>
+    <p class="text">${item.type}</p>
     <button class="delete-button" title="Удалить?"></button>
     `
     itemsList.append(li);
@@ -117,4 +121,3 @@ itemsList.addEventListener('click', function(e) {
 //     text.setAttribute('contenteditable', 'true')
 //   }
 // })
-

@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url(03523cf578d69fa923226ff457b92d90.ttf) format('truetype');
+}
+
+@charset "UTF-8";
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  background-color: #a4e6f4;
+}
+
+.wrapper {
+  max-width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  min-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 1000px;
+}
+
+.item {
+  width: 50%;
+  height: auto;
+  background-color: #a4e6f4;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+.item:last-child {
+  margin-bottom: 0;
+}
+
+.selected {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #a4e6f4;
+  }
+  100% {
+    background-color: #66cccc;
+  }
+}
+.form {
+  margin-bottom: 40px;
+}
+
+.input-name {
+  width: 200px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.input-type {
+  width: 200px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.add-button {
+  background-color: #0099FF;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 7px;
+  font-size: 1.2rem;
+}
+.add-button:hover {
+  opacity: 0.5;
+}
+.add-button:active {
+  opacity: 1;
+}
+
+.delete-button {
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  background-color: inherit;
+}
+.delete-button:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "";
+  font-size: 1.2rem;
+  color: #393939;
+}
+
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+.text {
+  width: 95%;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=main.css.map*/

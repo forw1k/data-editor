@@ -228,7 +228,7 @@ itemsList.addEventListener("dragover", function (e) {
 var arrData = [];
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-  addObj(inputName.value, inputType.Value);
+  addObj(inputName.value, inputType.value);
 });
 
 function addObj(item) {
@@ -252,8 +252,8 @@ function renderArrData(arrData) {
     li.setAttribute('class', 'item');
     li.setAttribute('data-key', item.id);
     li.setAttribute('draggable', 'true');
-    li.setAttribute('contenteditable', 'true');
-    li.innerHTML = "\n    <p class=\"text\">".concat(item.name, "</p>\n    <p class=\"text\">").concat(item.type, "</p>\n    <button class=\"delete-button\" title=\"\u0423\u0434\u0430\u043B\u0438\u0442\u044C?\"></button>\n    ");
+    li.setAttribute('contenteditable', 'false');
+    li.innerHTML = "\n    <p class=\"text\">".concat(item.name, "</p>\n    <p class=\"text\">").concat(item.type, "</p>\n    <button class=\"edit-button\" title=\"\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C?\"></button>\n    <button class=\"delete-button\" title=\"\u0423\u0434\u0430\u043B\u0438\u0442\u044C?\"></button>\n    ");
     itemsList.append(li);
   });
 }
@@ -284,12 +284,19 @@ itemsList.addEventListener('click', function (e) {
   if (e.target.classList.contains('delete-button')) {
     deleteObj(e.target.parentElement.getAttribute('data-key'));
   }
-}); // const text = document.querySelector('.text')
-// text.addEventListener('dblclick', (e) => {
-//    {
-//     text.setAttribute('contenteditable', 'true')
-//   }
-// })
+
+  if (e.target.classList.contains('edit-button')) {
+    editObj(e.target.parentElement.setAttribute('contenteditable', 'true'));
+    editObj(e.target.classList.remove('edit-button'));
+    editObj(e.target.classList.add('confirm'));
+  }
+});
+
+function editObj(id) {
+  arrData = arrData.filter(function (item) {
+    return item.id != id;
+  });
+}
 
 /***/ }),
 

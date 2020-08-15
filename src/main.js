@@ -55,7 +55,7 @@ let arrData = []
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  addObj(inputName.value, inputType.Value)
+  addObj(inputName.value, inputType.value)
 })
 
 function addObj(item) {
@@ -79,10 +79,11 @@ function renderArrData(arrData) {
     li.setAttribute('class', 'item');
     li.setAttribute('data-key', item.id);
     li.setAttribute('draggable','true');
-    li.setAttribute('contenteditable','true');
+    li.setAttribute('contenteditable','false');
     li.innerHTML = `
     <p class="text">${item.name}</p>
     <p class="text">${item.type}</p>
+    <button class="edit-button" title="Изменить?"></button>
     <button class="delete-button" title="Удалить?"></button>
     `
     itemsList.append(li);
@@ -110,14 +111,19 @@ function deleteObj(id) {
 getFromLocalStorage();
 
 itemsList.addEventListener('click', function(e) {
+
   if (e.target.classList.contains('delete-button')) {
     deleteObj(e.target.parentElement.getAttribute('data-key'));
   }
+  if (e.target.classList.contains('edit-button')) {
+    editObj(e.target.parentElement.setAttribute('contenteditable', 'true'))
+    editObj(e.target.classList.remove('edit-button'))
+    editObj(e.target.classList.add('confirm'))
+  }
 });
 
-// const text = document.querySelector('.text')
-// text.addEventListener('dblclick', (e) => {
-//    {
-//     text.setAttribute('contenteditable', 'true')
-//   }
-// })
+function editObj(id) {
+  arrData = arrData.filter(function(item) {
+    return item.id !=id;
+  })
+}

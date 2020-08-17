@@ -3,6 +3,7 @@
   src: url(03523cf578d69fa923226ff457b92d90.ttf) format('truetype');
 }
 
+
 @charset "UTF-8";
 body {
   font-family: "Roboto", sans-serif;
@@ -54,7 +55,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
+  padding: 0 5px;
   border-radius: 5px;
   margin-bottom: 5px;
   color: #ffffff;
@@ -65,6 +66,7 @@ ul {
 
 .selected {
   animation: pulse 1s infinite;
+  border: 2px solid #66cccc;
 }
 
 @keyframes pulse {
@@ -77,6 +79,9 @@ ul {
 }
 .form {
   margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-name {
@@ -102,6 +107,7 @@ ul {
 .add-button {
   background-color: #0099FF;
   color: #fff;
+  width: 80px;
   border: none;
   outline: none;
   border-radius: 5px;
@@ -116,8 +122,6 @@ ul {
 }
 
 .delete-button {
-  width: 25px;
-  height: 25px;
   border-radius: 5px;
   border: none;
   background-color: inherit;
@@ -131,8 +135,6 @@ ul {
 }
 
 .edit-button {
-  width: 25px;
-  height: 25px;
   border-radius: 5px;
   border: none;
   background-color: inherit;
@@ -145,10 +147,9 @@ ul {
   color: #393939;
 }
 
-.confirm {
-  width: 25px;
-  height: 25px;
-  background-color: lightgreen;
+.edit-button.active:before {
+  content: "";
+  color: #006828;
 }
 
 [contenteditable] {
@@ -156,11 +157,54 @@ ul {
 }
 
 .text {
-  width: 95%;
+  width: 100%;
   font-size: 1rem;
   cursor: pointer;
   margin: 0;
+  padding: 5px;
+}
+
+button,
+button:active,
+button:focus {
+  outline: none;
+}
+
+.input-color {
+  border-radius: 5px;
+  width: 40px;
+  height: 38px;
+  margin-right: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  position: relative;
+}
+.input-color:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "";
+  color: #393939;
+  font-size: 2rem;
+  position: absolute;
+  transform: translate(50%, -50%);
+  top: 50%;
+  right: 50%;
+}
+
+.input-color::-webkit-color-swatch-wrapper {
   padding: 0;
+}
+
+.input-color::-webkit-color-swatch {
+  border: none;
+  border-radius: 5px;
+}
+
+.main-title {
+  color: #393939;
 }
 
 /*# sourceMappingURL=main.css.map*/

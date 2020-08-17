@@ -189,6 +189,7 @@ __webpack_require__.r(__webpack_exports__);
 var form = document.querySelector('.form');
 var inputName = document.querySelector('.input-name');
 var inputType = document.querySelector('.input-type');
+var inputColor = document.querySelector('.input-color');
 var itemsList = document.querySelector('.items-list');
 var item = document.querySelector('.item'); //draggable
 
@@ -228,20 +229,22 @@ itemsList.addEventListener("dragover", function (e) {
 var arrData = [];
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-  addObj(inputName.value, inputType.value);
+  addObj(inputName.value, inputType.value, inputColor.value);
 });
 
-function addObj(item) {
-  if (item !== '') {
+function addObj(name, type, color) {
+  if (inputName.value !== '' && inputType.value !== '') {
     var obj = {
       id: Date.now(),
-      name: item,
-      type: item
+      name: name,
+      type: type,
+      color: color
     };
     arrData.push(obj);
     addToLocalStorage(arrData);
     inputName.value = '';
     inputType.value = '';
+    inputColor.value = '#ffffff';
   }
 }
 
@@ -253,7 +256,7 @@ function renderArrData(arrData) {
     li.setAttribute('data-key', item.id);
     li.setAttribute('draggable', 'true');
     li.setAttribute('contenteditable', 'false');
-    li.innerHTML = "\n    <p class=\"text\">".concat(item.name, "</p>\n    <p class=\"text\">").concat(item.type, "</p>\n    <button class=\"edit-button\" title=\"\u0418\u0437\u043C\u0435\u043D\u0438\u0442\u044C?\"></button>\n    <button class=\"delete-button\" title=\"\u0423\u0434\u0430\u043B\u0438\u0442\u044C?\"></button>\n    ");
+    li.innerHTML = "\n    <p class=\"text text-name\">".concat(item.name, "</p>\n    <p class=\"text text-type\">").concat(item.type, "</p>\n    <p class=\"text text-color\">").concat(item.color, "</p>\n    <button class=\"edit-button\" title=\"edit\"></button>\n    <button class=\"delete-button\" title=\"delete notation\"></button>\n    ");
     itemsList.append(li);
   });
 }
@@ -280,23 +283,49 @@ function deleteObj(id) {
 }
 
 getFromLocalStorage();
-itemsList.addEventListener('click', function (e) {
-  if (e.target.classList.contains('delete-button')) {
-    deleteObj(e.target.parentElement.getAttribute('data-key'));
+itemsList.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-button")) {
+    deleteObj(e.target.parentElement.getAttribute("data-key"));
   }
 
-  if (e.target.classList.contains('edit-button')) {
-    editObj(e.target.parentElement.setAttribute('contenteditable', 'true'));
-    editObj(e.target.classList.remove('edit-button'));
-    editObj(e.target.classList.add('confirm'));
-  }
+  editObj(e.target);
 });
 
-function editObj(id) {
-  arrData = arrData.filter(function (item) {
-    return item.id != id;
-  });
+function editObj(currentItem) {
+  if (currentItem.classList.contains("edit-button")) {
+    var currentItemId = currentItem.parentElement.getAttribute("data-key");
+    var textName = currentItem.parentElement.querySelector(".text-name");
+    var textType = currentItem.parentElement.querySelector(".text-type");
+    var textColor = currentItem.parentElement.querySelector(".text-color");
+    var updateItem = {
+      id: Number(currentItemId),
+      name: textName.textContent,
+      type: textType.textContent,
+      color: textColor.textContent
+    };
+    currentItem.classList.toggle("active");
+    currentItem.parentElement.classList.toggle("active");
+    textName.toggleAttribute("contenteditable");
+    textType.toggleAttribute("contenteditable");
+    textColor.toggleAttribute("contenteditable");
+
+    if (!currentItem.parentElement.classList.contains("active")) {
+      addToLocalStorage(updateData(updateItem));
+    }
+  }
 }
+
+var updateData = function updateData(updateItem) {
+  var index = arrData.findIndex(function (item) {
+    return item.id === updateItem.id;
+  });
+
+  if (index >= 0) {
+    arrData[index] = updateItem;
+  }
+
+  return arrData;
+};
 
 /***/ }),
 

@@ -1,8 +1,10 @@
 const form = document.querySelector('.form');
 const inputName = document.querySelector('.input-name');
 const inputType = document.querySelector('.input-type');
+const inputColor = document.querySelector('.input-color');
 const itemsList = document.querySelector('.items-list');
 const item = document.querySelector('.item');
+
 
 //draggable
 itemsList.addEventListener(`dragstart`, (e) => {
@@ -55,20 +57,22 @@ let arrData = []
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  addObj(inputName.value, inputType.value)
+  addObj(inputName.value, inputType.value, inputColor.value)
 })
 
-function addObj(item) {
-  if (item !== '') {
+function addObj(name, type, color) {
+  if (inputName.value !== '' && inputType.value !== '') {
     const obj = {
       id: Date.now(),
-      name: item,
-      type: item
+      name,
+      type,
+      color
     }
       arrData.push(obj);
       addToLocalStorage(arrData);
       inputName.value = '';
       inputType.value = '';
+      inputColor.value = '#ffffff';
   }
 }
 
@@ -81,10 +85,11 @@ function renderArrData(arrData) {
     li.setAttribute('draggable','true');
     li.setAttribute('contenteditable','false');
     li.innerHTML = `
-    <p class="text">${item.name}</p>
-    <p class="text">${item.type}</p>
-    <button class="edit-button" title="Изменить?"></button>
-    <button class="delete-button" title="Удалить?"></button>
+    <p class="text text-name">${item.name}</p>
+    <p class="text text-type">${item.type}</p>
+    <p class="text text-color">${item.color}</p>
+    <button class="edit-button" title="edit"></button>
+    <button class="delete-button" title="delete notation"></button>
     `
     itemsList.append(li);
   })
@@ -110,20 +115,45 @@ function deleteObj(id) {
 }
 getFromLocalStorage();
 
-itemsList.addEventListener('click', function(e) {
-
-  if (e.target.classList.contains('delete-button')) {
-    deleteObj(e.target.parentElement.getAttribute('data-key'));
+itemsList.addEventListener("click", function (e) {
+  if (e.target.classList.contains("delete-button")) {
+    deleteObj(e.target.parentElement.getAttribute("data-key"));
   }
-  if (e.target.classList.contains('edit-button')) {
-    editObj(e.target.parentElement.setAttribute('contenteditable', 'true'))
-    editObj(e.target.classList.remove('edit-button'))
-    editObj(e.target.classList.add('confirm'))
-  }
+  editObj(e.target);
 });
 
-function editObj(id) {
-  arrData = arrData.filter(function(item) {
-    return item.id !=id;
-  })
+function editObj(currentItem) {
+  if (currentItem.classList.contains("edit-button")) {
+    const currentItemId = currentItem.parentElement.getAttribute("data-key");
+    const textName = currentItem.parentElement.querySelector(".text-name");
+    const textType = currentItem.parentElement.querySelector(".text-type");
+    const textColor = currentItem.parentElement.querySelector(".text-color");
+    const updateItem = {
+      id: Number(currentItemId),
+      name: textName.textContent,
+      type: textType.textContent,
+      color: textColor.textContent,
+    };
+
+    currentItem.classList.toggle("active");
+    currentItem.parentElement.classList.toggle("active");
+    textName.toggleAttribute("contenteditable");
+    textType.toggleAttribute("contenteditable");
+    textColor.toggleAttribute("contenteditable");
+
+    if (!currentItem.parentElement.classList.contains("active")) {
+      addToLocalStorage(updateData(updateItem));
+    }
+  }
 }
+
+const updateData = (updateItem) => {
+  const index = arrData.findIndex((item) => item.id === updateItem.id);
+
+  if (index >= 0) {
+    arrData[index] = updateItem;
+  }
+
+  return arrData;
+};
+

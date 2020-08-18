@@ -1,186 +1,41 @@
+@import './form.scss';
+@import './list.scss';
+@import './buttons.scss';
+
+html {
+  font-size: 16px;
+}
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   box-sizing: border-box;
-  background-color: #a4e6f4;
+  color: #393939;
+  background-color: #b8eefb;
 }
 .wrapper {
-  max-width: 1200px;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   margin: 0 auto;
   padding-top: 5%;
   display: flex;
   justify-content: center;
 }
 .container {
-  min-width: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-}
-button:hover {
-  cursor: pointer;
+  padding: 0 15px;
+  width: 940px;
 }
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.items-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 1000px;
+h1 {
+  margin: 0 0 30px 0;
+  padding: 0;
 }
-.item {
-  width: 50%;
-  height: auto;
-  background-color: #a4e6f4;
-  border: 2px solid #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5px;
-  border-radius: 5px;
-  margin-bottom: 5px;
-  color: #ffffff;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-.selected {
-  animation: pulse 1s infinite;
-  border: 2px solid #66cccc;
-}
-@keyframes pulse {
-  0% {
-    background-color: #a4e6f4;
-  }
-  100% {
-    background-color: #66cccc;
-  }
-}
-.form {
-  margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.input-name {
-  width: 200px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 1rem;
-}
-.input-type {
-  width: 200px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 1rem;
-}
-
-.add-button {
-  background-color: #0099FF;
-  color: #fff;
-  width: 80px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  padding: 7px;
-  font-size: 1.2rem;
-  &:hover{
-    opacity: 0.5;
-  }
-  &:active{
-    opacity: 1;
-  }
-}
-.delete-button {
-
-  border-radius: 5px;
-  border: none;
-  background-color: inherit;
-  &:before {
-    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f2ed";
-    font-size: 1.2rem;
-    color: #393939;
-  }
-}
-.edit-button {
-
-  border-radius: 5px;
-  border: none;
-  background-color: inherit;
-  &:before {
-    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f304";
-    font-size: 1.2rem;
-    color: #393939;
-  }
-}
-.edit-button.active {
-  
-  &:before {
-    content: "\f00c";
-    color: #006828;
-  }
-}
-
 [contenteditable] {
   outline: 0px solid transparent;
-}
-
-.text{
-  width: 100%;
-  font-size: 1rem;
-  cursor: pointer;
-  margin: 0;
-  padding: 5px;
-}
-
-button, 
-button:active, 
-button:focus {
-    outline: none;
-}
-
-
-.input-color{
-  border-radius: 5px;
-  width: 40px;
-  height: 38px;
-  margin-right: 10px;
-  background-color: transparent;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  -webkit-appearance: none;
-  position: relative;
-  &:before {
-    font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f1fc";
-    color: #393939;
-    font-size: 2rem;
-    position: absolute;
-    transform: translate(50%, -50%);
-    top: 50%;
-    right: 50%;
-  }
-}
-
-.input-color::-webkit-color-swatch-wrapper {
-  padding: 0;	
-}
-.input-color::-webkit-color-swatch {
-  border: none;
-  border-radius: 5px;
-}
-.main-title {
-  color: #393939;
 }

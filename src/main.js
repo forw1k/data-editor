@@ -5,7 +5,6 @@ const inputColor = document.querySelector('.input-color');
 const itemsList = document.querySelector('.items-list');
 const item = document.querySelector('.item');
 
-
 //draggable
 itemsList.addEventListener(`dragstart`, (e) => {
   e.target.classList.add(`selected`);
@@ -51,16 +50,16 @@ itemsList.addEventListener(`dragover`, (e) => {
 	itemsList.insertBefore(activeItem, nextItem);
 });
 
-///
+/// 
 
 let arrData = []
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
   addObj(inputName.value, inputType.value, inputColor.value)
 })
 
-function addObj(name, type, color) {
+const addObj = (name, type, color) => {
   if (inputName.value !== '' && inputType.value !== '') {
     const obj = {
       id: Date.now(),
@@ -76,30 +75,31 @@ function addObj(name, type, color) {
   }
 }
 
-function renderArrData(arrData) {
+const renderArrData = (arrData) => {
   itemsList.innerHTML = '';
-  arrData.forEach(function(item){
+  arrData.forEach((item) => {
     const li = document.createElement('li');
     li.setAttribute('class', 'item');
     li.setAttribute('data-key', item.id);
     li.setAttribute('draggable','true');
     li.setAttribute('contenteditable','false');
     li.innerHTML = `
-    <p class="text text-name">${item.name}</p>
-    <p class="text text-type">${item.type}</p>
-    <p class="text text-color">${item.color}</p>
-    <button class="edit-button" title="edit"></button>
-    <button class="delete-button" title="delete notation"></button>
+    <span class="text text-name">${item.name}</span>
+    <span class="text text-type">${item.type}</span>
+    <span class="text text-color">${item.color}</span>
+    <button class="button edit-button action-button" title="edit"></button>
+    <button class="button delete-button action-button" title="delete notation"></button>
     `
     itemsList.append(li);
   })
 }
 
-function addToLocalStorage(arrData) {
+const addToLocalStorage = (arrData) => {
   localStorage.setItem('arrData', JSON.stringify(arrData));
   renderArrData(arrData);
 }
-function getFromLocalStorage() {
+
+const  getFromLocalStorage = () => {
   const reference = localStorage.getItem('arrData');
   if(reference) {
     arrData = JSON.parse(reference);
@@ -107,7 +107,7 @@ function getFromLocalStorage() {
   }
 }
 
-function deleteObj(id) {
+const  deleteObj = (id) => {
   arrData = arrData.filter(function(item) {
     return item.id !=id;
   })
@@ -122,7 +122,7 @@ itemsList.addEventListener("click", function (e) {
   editObj(e.target);
 });
 
-function editObj(currentItem) {
+const editObj = (currentItem) => {
   if (currentItem.classList.contains("edit-button")) {
     const currentItemId = currentItem.parentElement.getAttribute("data-key");
     const textName = currentItem.parentElement.querySelector(".text-name");
@@ -153,7 +153,5 @@ const updateData = (updateItem) => {
   if (index >= 0) {
     arrData[index] = updateItem;
   }
-
   return arrData;
 };
-

@@ -1,11 +1,10 @@
 .form {
-  height: 100px;
   width: 100%;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  @media (max-width: 768px){
+  justify-content: space-between;
+  @media (max-width: 767px){
     margin-bottom: 20px;
   }
 }
@@ -17,17 +16,23 @@
   margin-right: 10px;
   font-size: 1rem;
   &-name, &-type {
-    width: 40%;
+    min-width: 40%;
+    @media (max-width: 767px){
+      min-width: 30%;
+    }
+    @media (max-width: 479px){
+      min-width: 20%;
+    }
   }
   &-color {
   width: 40px;
   height: 40px;
   padding: 0;
   background-color: transparent;
+  flex-shrink: 0;
   cursor: pointer;
   -webkit-appearance: none;
   position: relative;
-  flex-shrink: 0;
   &:before {
     font-family: "Font Awesome 5 Free"; font-weight: 900;
     content: "\f1fc";

@@ -84,9 +84,9 @@ const renderArrData = (arrData) => {
     li.setAttribute('draggable','true');
     li.setAttribute('contenteditable','false');
     li.innerHTML = `
-    <span class="text text-name">${item.name}</span>
-    <span class="text text-type">${item.type}</span>
-    <span class="text text-color">${item.color}</span>
+    <div class="text text-name">${item.name}</div>
+    <div class="text text-type">${item.type}</div>
+    <div class="text text-color">${item.color}</div>
     <button class="button edit-button action-button" title="edit"></button>
     <button class="button delete-button action-button" title="delete notation"></button>
     `

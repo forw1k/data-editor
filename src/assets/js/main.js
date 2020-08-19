@@ -64,7 +64,7 @@ form.addEventListener('submit', (e) => {
 
 const addObj = (name, type, color) => {
   if (inputName.value !== '' && inputType.value !== '' &&
-  inputColor.value !== null && inputColor.value !== undefined) {
+  inputColor.value !== "" && inputColor.value !== undefined) {
     const obj = {
       id: Date.now(),
       name,

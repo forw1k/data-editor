@@ -22,6 +22,9 @@
 .selected {
   animation: pulse 1s infinite;
   border: 2px solid #66cccc;
+  @media (max-width: 768px) {
+    animation: none;
+  }
 }
 @keyframes pulse {
   0% {

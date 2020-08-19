@@ -1,3 +1,6 @@
+// import Pickr from '@simonwep/pickr';
+import Pickr from '@simonwep/pickr/dist/pickr.es5.min';
+
 const form = document.querySelector('.form');
 const inputName = document.querySelector('.input-name');
 const inputType = document.querySelector('.input-type');
@@ -60,7 +63,8 @@ form.addEventListener('submit', (e) => {
 })
 
 const addObj = (name, type, color) => {
-  if (inputName.value !== '' && inputType.value !== '') {
+  if (inputName.value !== '' && inputType.value !== '' &&
+  inputColor.value !== null && inputColor.value !== undefined) {
     const obj = {
       id: Date.now(),
       name,
@@ -71,7 +75,7 @@ const addObj = (name, type, color) => {
       addToLocalStorage(arrData);
       inputName.value = '';
       inputType.value = '';
-      inputColor.value = '#ffffff';
+      inputColor.value = '';
   }
 }
 
@@ -155,3 +159,33 @@ const updateData = (updateItem) => {
   }
   return arrData;
 };
+
+const pickr = Pickr.create({
+  el: '.color-picker',
+  theme: 'monolith',
+  useAsButton: true,
+
+  components: {
+
+      // Main components
+      preview: true,
+      opacity: false,
+      hue: true,
+
+      // Input / output Options
+      interaction: {
+          hex: true,
+          rgba: true,
+          hsla: false,
+          hsva: false,
+          cmyk: false,
+          input: true,
+          clear: true,
+          save: true
+      }
+  }
+});
+// color picker value
+pickr.on('change', (color) => {
+	inputColor.value = color[`to${pickr.getColorRepresentation()}`]().toString(0);
+})
